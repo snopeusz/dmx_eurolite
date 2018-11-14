@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+
+<c74object name='dmx.eurolite' category='communication'>
+
+	<digest>Eurolite USB-DMX512-PRO simple interface</digest>
+	<description>This objects sends DMX data directly to Eurolite USB-DMX512-PRO device using libusb transfer methods. </description>
+
+
+	<!--METADATA-->
+
+	<metadatalist>
+		<metadata name='author'>Andrzej Kopeć </metadata>
+		<metadata name='tag'>communication, lighting, DMX</metadata>
+	</metadatalist>
+
+
+	<!--ARGUMENTS-->
+
+	<objarglist>
+
+	</objarglist>
+
+
+	<!--MESSAGES-->
+
+	<methodlist>
+
+		<method name='bang'>
+			<digest>Prints test message (qelem)</digest>
+			<description>(for now does nothing (worthwhile))</description>
+		</method>
+
+		<method name='sync'>
+			<digest>Trigger synchronous transfer of DMX data</digest>
+			<description>Trigger <b>synchronous</b> transfering of current DMX data buffer. The message is always deferred to main thred (Qelem). </description>
+		</method>
+
+		<method name='async'>
+			<digest>Trigger asynchronous transfer of DMX data</digest>
+			<description>Trigger <b>asynchronous</b> transfering of current DMX data buffer. The message is always deferred to main thred (Qelem).</description>
+		</method>
+		
+		<method name="set">
+			<arglist>
+				<arg name="start" optional="0" type="int" />
+				<arg name="values" optional="0" type="list" />
+			</arglist>
+			<digest>
+				Set a list of <b>values</b> starting from <b>start</b> channel
+			</digest>
+			<description>
+				Sets values in certain channels (zero-based indexing). The first argument specifies the first channel. The next number is the value to be set for that channel, and each number after that sets value for a successive channel.
+			</description>
+		</method>
+
+		<method name='setchannel'>
+			<arglist>
+				<arg name="channel" optional="0" type="int" />
+				<arg name="value" optional="0" type="int" />
+			</arglist>
+			<digest>Set a value for a specified channel. </digest>
+			<description>Sets a value for a specified channel. Channels are in range 0-511 and values 0-255.</description>
+		</method>
+
+		<method name='open'>
+			<digest>Open device for communication</digest>
+			<description>Opens device (find and claim proper USB interface/endpoint). If everything is ok, the <at>ready</at> attribute is set to 1.</description>
+		</method>
+
+		<method name='close'>
+			<digest>Close device</digest>
+			<description>Closes device (release USB interface/endpoint).</description>
+		</method>
+
+		<method name='clear'>
+			<digest>Zero all channels</digest>
+			<description>Sets all DMX channels to zero.</description>
+		</method>
+
+		<method name='postinfo'>
+			<digest>Post info about the object state in Max Console</digest>
+			<description>Posts info about <at>ready</at> status, last transfer state, and current contents of DMX buffer.</description>
+		</method>
+
+	</methodlist>
+
+	<!--ATTRIBUTES-->
+
+	<attributelist>
+
+		<attribute name='timeout' get='1' set='1' type='long' size='1' >
+			<digest>Timeout for USB transfer in ms. </digest>
+			<description>Timeout for USB transfer in ms. If the device doesn't respond try setting larger values.</description>
+		</attribute>
+
+		<attribute name='ready' get='1' set='0' type='char' size='1' >
+			<digest>Ready status of the device (readonly)</digest>
+			<description>Ready status of the device (readonly). Informs if the USB driver found and claimed target device.</description>
+		</attribute>
+
+	</attributelist>
+
+
+	<!--RELATED-->
+
+	<seealsolist>
+		<seealso name='udpsend' />
+	</seealsolist>
+
+
+</c74object>
