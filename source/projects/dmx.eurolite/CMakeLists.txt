@@ -15,6 +15,7 @@ add_library(
 	${PROJECT_NAME} 
 	MODULE
 	${PROJECT_NAME}.cpp
+	libUSB_EuroliteDMX512USB.cpp
 )
 
 find_library(LIBUSB 

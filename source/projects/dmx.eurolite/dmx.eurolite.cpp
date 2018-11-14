@@ -127,15 +127,16 @@ void dmx_eurolite_set(t_dmx_eurolite *self, t_symbol *sym, long argc,
   self->dmx->set_channel_array_from(first, data_count, data.data());
 }
 
-void dmx_eurolite_setrgb1(t_dmx_eurolite *self, long ir, long ig, long ib) {
-  unsigned char r =
-      static_cast<unsigned char>(std::max(0l, std::min(255l, ir)));
-  unsigned char g =
-      static_cast<unsigned char>(std::max(0l, std::min(255l, ig)));
-  unsigned char b =
-      static_cast<unsigned char>(std::max(0l, std::min(255l, ib)));
-  self->dmx->set_rgb_from(0, r, g, b);
-}
+// TODO: REMOVE
+// void dmx_eurolite_setrgb1(t_dmx_eurolite *self, long ir, long ig, long ib) {
+//   unsigned char r =
+//       static_cast<unsigned char>(std::max(0l, std::min(255l, ir)));
+//   unsigned char g =
+//       static_cast<unsigned char>(std::max(0l, std::min(255l, ig)));
+//   unsigned char b =
+//       static_cast<unsigned char>(std::max(0l, std::min(255l, ib)));
+//   self->dmx->set_rgb_from(0, r, g, b);
+// }
 
 void dmx_eurolite_assist(t_dmx_eurolite *self, void *unused,
                          t_assist_function io, long index, char *string_dest) {
@@ -209,8 +210,8 @@ void ext_main(void *r) {
                        dmx_eurolite_ready_set);
 
   // FIXME: only for quick testing, remove later:
-  class_addmethod(this_class, (method)dmx_eurolite_setrgb1, "setrgb1",
-                  A_DEFLONG, A_DEFLONG, A_DEFLONG, 0);
+  // class_addmethod(this_class, (method)dmx_eurolite_setrgb1, "setrgb1",
+  //                 A_DEFLONG, A_DEFLONG, A_DEFLONG, 0);
 
   class_register(CLASS_BOX, this_class);
 }
