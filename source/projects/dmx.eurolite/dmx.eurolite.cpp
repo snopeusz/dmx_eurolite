@@ -101,7 +101,7 @@ void dmx_eurolite_setchannel(t_dmx_eurolite *self, long ch, long val)
 }
 /**
  *
- * This method goes along "set" int standart [table] object:
+ * This method goes along the lines of "set" in builtin [table] object:
  * set <ch_num> <val1> [<val2>...]
  */
 void dmx_eurolite_set(t_dmx_eurolite *self, t_symbol *sym, long argc,
@@ -109,7 +109,7 @@ void dmx_eurolite_set(t_dmx_eurolite *self, t_symbol *sym, long argc,
 {
   if (argc < 2)
     return;
-  const int first = atom_getlong(argv); // first channel from to copy
+  const int first = atom_getlong(argv);
   const int data_count = argc - 1;
   std::vector<unsigned char> data;
   data.reserve(data_count);

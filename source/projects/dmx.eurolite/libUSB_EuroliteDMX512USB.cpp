@@ -1,6 +1,5 @@
 #include "libUSB_EuroliteDMX512USB.hpp"
 
-
 #define print_debug(xxx)
 
 LibUSB_EuroliteDMX512USB::LibUSB_EuroliteDMX512USB()
@@ -30,16 +29,16 @@ void LibUSB_EuroliteDMX512USB::initialize_libusb()
 }
 
 void LibUSB_EuroliteDMX512USB::initialize_data()
-    {
-        std::lock_guard<std::mutex> lock(data_mutex);
-        data[0] = 0x7e;                // start of message
-        data[1] = 0x06;                // dmx label
-        data[2] = 0b00000001;          // universe size LSB
-        data[3] = 0b00000010;          // universe size MSB
-        data[4] = 0;                   // start code (Null Start Code)
-        std::memset(data + 5, 0, 512); // zero whole DMX univ.
-        data[data_size - 1] = 0xe7;    // end of message
-    }
+{
+    std::lock_guard<std::mutex> lock(data_mutex);
+    data[0] = 0x7e;                // start of message
+    data[1] = 0x06;                // dmx label
+    data[2] = 0b00000001;          // universe size LSB
+    data[3] = 0b00000010;          // universe size MSB
+    data[4] = 0;                   // start code (Null Start Code)
+    std::memset(data + 5, 0, 512); // zero whole DMX univ.
+    data[data_size - 1] = 0xe7;    // end of message
+}
 
 // Report state
 bool LibUSB_EuroliteDMX512USB::is_ready()
@@ -91,10 +90,6 @@ void LibUSB_EuroliteDMX512USB::close_device()
     }
 }
 
-/**
-     * Methods for setting DMX buffer data
-     */
-
 void LibUSB_EuroliteDMX512USB::clear_all_channels()
 {
     data_mutex.lock();
@@ -102,11 +97,6 @@ void LibUSB_EuroliteDMX512USB::clear_all_channels()
     data_mutex.unlock();
 }
 
-/** Sets a value for a specified channel
-     * 
-     *  @param  channel Channel number (zero based)
-     *  @param  value   Value for that channel (unsigned int)
-     */
 void LibUSB_EuroliteDMX512USB::set_channel(int channel, unsigned char value)
 {
     if (channel >= 0 && channel < 512)
@@ -116,11 +106,6 @@ void LibUSB_EuroliteDMX512USB::set_channel(int channel, unsigned char value)
     }
 }
 
-/** Sets values for consecuteve channels starting the first channel
-     * 
-     *  @param  c       Count of values
-     *  @param  v       Pointer to values array (unsigned int)
-     */
 void LibUSB_EuroliteDMX512USB::set_channel_array(int c, unsigned char *v)
 {
     if (c > 512)
@@ -130,13 +115,6 @@ void LibUSB_EuroliteDMX512USB::set_channel_array(int c, unsigned char *v)
         data[5 + c] = v[c];
 }
 
-/** Sets values for consecuteve channels starting from selected channel
-     * 
-     *  @param  from    The first channel number to place values.
-     *  @param  c       Count of values
-     *  @param  v       Pointer to values array (unsigned int)
-     * 
-     */
 void LibUSB_EuroliteDMX512USB::set_channel_array_from(int from, int c, unsigned char *v)
 {
     if (from > 511) // safety check
@@ -167,9 +145,7 @@ void LibUSB_EuroliteDMX512USB::set_channel_memcpy_from(int from, int c, unsigned
 }
 
 // ---- SYNC TRANSFER ----
-/**
-     * Transfer data in blocking (sync) mode.
-     */
+
 void LibUSB_EuroliteDMX512USB::sync_transfer_data()
 {
     if (!ready)
@@ -193,9 +169,6 @@ void LibUSB_EuroliteDMX512USB::sync_transfer_data()
 
 // ---- ASYNC TRANSFER ----
 
-/**
-     * Fill async transfer data struct and submit.
-     */
 void LibUSB_EuroliteDMX512USB::async_transfer_fill_and_submit()
 {
     // device must be ready! (tested in "service_async_transfer" method)
@@ -223,28 +196,18 @@ void LibUSB_EuroliteDMX512USB::async_transfer_fill_and_submit()
         async_transfer_pending = true;
 }
 
-/**
-     * Cancel async transfer
-     */
 void LibUSB_EuroliteDMX512USB::async_transfer_cancel()
 {
     if (async_transfer_pending) // cancel only if there is something to cancel
         libusb_cancel_transfer(xfr);
 }
 
-/**
-     * A method calling libusb routine for handling events in async transfer.
-     */
 void LibUSB_EuroliteDMX512USB::async_transfer_tick()
 {
     //libusb_handle_events_timeout_completed(context, &zero_tv, NULL);
     async_event_handling_status = (libusb_error)libusb_handle_events_completed(context, NULL);
 }
 
-/**
-     * Method should be called regularily to service events generated from
-     * async transfers. 
-     */
 void LibUSB_EuroliteDMX512USB::service_async_transfer()
 {
     async_transfer_tick();
@@ -304,9 +267,6 @@ bool LibUSB_EuroliteDMX512USB::get_async_transfer_enabled()
 
 void LibUSB_EuroliteDMX512USB::set_timeout(int atimeout)
 {
-    // if (atimeout < 25)
-    //     timeout = 25u;
-    // else
     timeout = (unsigned int)atimeout;
 }
 
@@ -357,16 +317,4 @@ void LibUSB_EuroliteDMX512USB::cb_async_xfr_complete(struct libusb_transfer *x)
         me->async_transfer_wait_for_disable = false;
         me->enable_async_transfer(false);
     }
-    // switch(x->status) {
-    //     case LIBUSB_TRANSFER_COMPLETED:
-    //         break;
-    //     case LIBUSB_TRANSFER_CANCELLED:
-    //     case LIBUSB_TRANSFER_NO_DEVICE:
-    //     case LIBUSB_TRANSFER_TIMED_OUT:
-    //     case LIBUSB_TRANSFER_ERROR:
-    //     case LIBUSB_TRANSFER_STALL:
-    //     case LIBUSB_TRANSFER_OVERFLOW:
-    //         // Various type of errors here
-    //         break;
-    // }
 }
