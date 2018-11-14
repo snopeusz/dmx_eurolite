@@ -22,6 +22,7 @@ struct t_dmx_eurolite
 };
 
 static t_class *this_class = nullptr;
+static t_symbol *sym_readnoly;
 
 // QElem tasks
 void sync_transfer_qtask(t_dmx_eurolite *self)
@@ -66,9 +67,17 @@ void dmx_eurolite_async(t_dmx_eurolite *self)
   qelem_set(self->async_qelem);
 }
 
-void dmx_eurolite_open(t_dmx_eurolite *self) { self->dmx->open_device(); }
+void dmx_eurolite_open(t_dmx_eurolite *self)
+{
+  self->dmx->open_device();
+  object_attr_touch((t_object *)self, sym_readnoly);
+}
 
-void dmx_eurolite_close(t_dmx_eurolite *self) { self->dmx->close_device(); }
+void dmx_eurolite_close(t_dmx_eurolite *self)
+{
+  self->dmx->close_device();
+  object_attr_touch((t_object *)self, sym_readnoly);
+}
 
 void dmx_eurolite_clear(t_dmx_eurolite *self)
 {
@@ -196,6 +205,8 @@ void ext_main(void *r)
   CLASS_ATTR_STYLE_LABEL(this_class, "ready", 0, "onoff", "Device ready state");
   CLASS_ATTR_ACCESSORS(this_class, "ready", dmx_eurolite_ready_get,
                        dmx_eurolite_ready_set);
+
+  sym_readnoly = gensym("readonly");
 
   class_register(CLASS_BOX, this_class);
 }
