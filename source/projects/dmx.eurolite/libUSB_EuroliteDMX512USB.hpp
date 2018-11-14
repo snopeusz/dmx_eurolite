@@ -29,11 +29,6 @@ class LibUSB_EuroliteDMX512USB
      */
     void clear_all_channels();
 
-    //testing method
-    // void set_rgb(unsigned char r, unsigned char g, unsigned char b);
-
-    // void set_rgb_from(int f, unsigned char r, unsigned char g, unsigned char b);
-
     /** Sets a value for a specified channel
      * 
      *  @param  channel Channel number (zero based)

@@ -102,28 +102,6 @@ void LibUSB_EuroliteDMX512USB::clear_all_channels()
     data_mutex.unlock();
 }
 
-// TODO: REMOVE testing method
-// void LibUSB_EuroliteDMX512USB::set_rgb(unsigned char r, unsigned char g, unsigned char b)
-// {
-//     //std::lock_guard<std::mutex> lock(data_mutex);
-//     data_mutex.lock();
-//     data[5] = r;
-//     data[6] = g;
-//     data[7] = b;
-//     data[8] = 0xFF;
-//     data_mutex.unlock();
-//     print_debug("set_rgb " << (int)r << " " << (int)g << " " << (int)b);
-// }
-
-// void LibUSB_EuroliteDMX512USB::set_rgb_from(int f, unsigned char r, unsigned char g, unsigned char b)
-// {
-//     std::lock_guard<std::mutex> lock(data_mutex);
-//     data[f + 5] = r;
-//     data[f + 6] = g;
-//     data[f + 7] = b;
-//     data[f + 8] = 0xFF;
-// }
-
 /** Sets a value for a specified channel
      * 
      *  @param  channel Channel number (zero based)
