@@ -12,7 +12,7 @@ build
 tmp
 
 package-info.json
-max-api
+#max-api
 
 CMakeFiles
 cmake_*
