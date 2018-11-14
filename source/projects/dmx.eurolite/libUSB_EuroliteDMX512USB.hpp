@@ -114,9 +114,6 @@ class LibUSB_EuroliteDMX512USB
 
     const char *get_async_event_status_name();
 
-    // obsolete
-    const char *get_sync_transmission_status_as_ccp();
-
   private:
     // --- device state
 

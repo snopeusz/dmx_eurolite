@@ -345,26 +345,6 @@ const char *LibUSB_EuroliteDMX512USB::get_async_event_status_name()
     return libusb_error_name(async_event_handling_status);
 }
 
-// obsolete
-const char *LibUSB_EuroliteDMX512USB::get_sync_transmission_status_as_ccp()
-{
-    switch (sync_transfer_status)
-    {
-    case LIBUSB_SUCCESS:
-        return "Success";
-    case LIBUSB_ERROR_TIMEOUT:
-        return "Failed: Timeout";
-    case LIBUSB_ERROR_PIPE:
-        return "Failed: Endpoint halted (PIPE error)";
-    case LIBUSB_ERROR_NO_DEVICE:
-        return "Failed: No device";
-    case -99:
-        return "Nothing sent yet or something else";
-    default:
-        return "Other";
-    }
-}
-
 void LibUSB_EuroliteDMX512USB::cb_async_xfr_complete(struct libusb_transfer *x)
 {
     LibUSB_EuroliteDMX512USB *me = (LibUSB_EuroliteDMX512USB *)x->user_data;

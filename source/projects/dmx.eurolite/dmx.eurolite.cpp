@@ -86,7 +86,6 @@ void dmx_eurolite_postinfo(t_dmx_eurolite *self)
               "ASYNC event handling status: %s\n"
               "DMX buffer: %s \n",
               (self->dmx->is_ready() ? "" : "not"),
-              //self->dmx->get_sync_transmission_status_as_ccp(),
               self->dmx->get_sync_transfer_status_name(),
               (self->dmx->get_async_transfer_enabled() ? "YES" : "NO"),
               self->dmx->get_async_submit_status_name(),
