@@ -136,7 +136,7 @@ void dmx_eurolite_set(t_dmx_eurolite *self, t_symbol *sym, long argc,
 void dmx_eurolite_set1(t_dmx_eurolite *self, t_symbol *sym, long argc,
                       t_atom *argv)
 {
-  if (argc < 2)
+  if (argc < 2 || argc > 513)
     return;
   const int first = atom_getlong(argv);
   const int data_count = argc - 1;
