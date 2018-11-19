@@ -117,25 +117,6 @@ void dmx_eurolite_setchannel(t_dmx_eurolite *self, long ch, long val)
 void dmx_eurolite_set(t_dmx_eurolite *self, t_symbol *sym, long argc,
                       t_atom *argv)
 {
-  if (argc < 2)
-    return;
-  const int first = atom_getlong(argv);
-  const int data_count = argc - 1;
-  std::vector<unsigned char> data;
-  data.reserve(data_count);
-  // iterate from the second element of argv to the end
-  for (int i = 1; i < argc; i++)
-  {
-    data.push_back(
-        static_cast<unsigned char>(clamp((int)atom_getlong(argv + i), 0, 255)));
-  }
-  self->dmx->set_channel_array_from(first, data_count, data.data());
-}
-
-// a version using std::array instead of std::vector (for testing)
-void dmx_eurolite_set1(t_dmx_eurolite *self, t_symbol *sym, long argc,
-                      t_atom *argv)
-{
   if (argc < 2 || argc > 513)
     return;
   const int first = atom_getlong(argv);
@@ -149,41 +130,6 @@ void dmx_eurolite_set1(t_dmx_eurolite *self, t_symbol *sym, long argc,
   self->dmx->set_channel_array_from(first, data_count, data.data());
 }
 
-// a version using C-style array // not much improvement from std::array
-void dmx_eurolite_set2(t_dmx_eurolite *self, t_symbol *sym, long argc,
-                      t_atom *argv)
-{
-  if (argc < 2 || argc > 512)
-    return;
-  const int first = atom_getlong(argv);
-  const int data_count = argc - 1;
-  unsigned char data[512];
-  int c = data_count;
-  int i = 0;
-  while(c--,i++)
-  {
-    data[i]=
-        static_cast<unsigned char>(clamp((int)atom_getlong(argv + i), 0, 255));
-  }
-  self->dmx->set_channel_array_from(first, data_count, data);
-}
-
-// a version using std::array and memcpy
-void dmx_eurolite_set3(t_dmx_eurolite *self, t_symbol *sym, long argc,
-                      t_atom *argv)
-{
-  if (argc < 2 || argc > 513)
-    return;
-  const int first = atom_getlong(argv);
-  const int data_count = argc - 1;
-  std::array<unsigned char, 512> data;
-  for (int i = 0; i < data_count; i++)
-  {
-    data[i]=
-        static_cast<unsigned char>(clamp((int)atom_getlong(argv + i), 0, 255));
-  }
-  self->dmx->set_channel_memcpy_from(first, data_count, data.data());
-}
 
 void dmx_eurolite_assist(t_dmx_eurolite *self, void *unused,
                          t_assist_function io, long index, char *string_dest)
@@ -239,9 +185,6 @@ void ext_main(void *r)
   class_addmethod(this_class, (method)dmx_eurolite_setchannel, "setchannel",
                   A_DEFLONG, A_DEFLONG, 0);
   class_addmethod(this_class, (method)dmx_eurolite_set, "set", A_GIMME, 0);
-  class_addmethod(this_class, (method)dmx_eurolite_set1, "set1", A_GIMME, 0); // TESTING
-  class_addmethod(this_class, (method)dmx_eurolite_set2, "set2", A_GIMME, 0); // TESTING
-  class_addmethod(this_class, (method)dmx_eurolite_set3, "set3", A_GIMME, 0); // TESTING
   class_addmethod(this_class, (method)dmx_eurolite_open, "open", 0);
   class_addmethod(this_class, (method)dmx_eurolite_close, "close", 0);
   class_addmethod(this_class, (method)dmx_eurolite_clear, "clear", 0);
