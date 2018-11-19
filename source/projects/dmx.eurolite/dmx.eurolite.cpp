@@ -149,7 +149,7 @@ void dmx_eurolite_set1(t_dmx_eurolite *self, t_symbol *sym, long argc,
   self->dmx->set_channel_array_from(first, data_count, data.data());
 }
 
-// a version using C-style array
+// a version using C-style array // not much improvement from std::array
 void dmx_eurolite_set2(t_dmx_eurolite *self, t_symbol *sym, long argc,
                       t_atom *argv)
 {
