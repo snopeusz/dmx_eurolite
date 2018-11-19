@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 83.0, 104.0, 636.0, 482.0 ],
+						"rect" : [ 0.0, 26.0, 636.0, 482.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -256,7 +256,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 636.0, 482.0 ],
+						"rect" : [ 83.0, 104.0, 636.0, 482.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -285,6 +285,18 @@
 						"subpatcher_template" : "",
 						"showontab" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"id" : "obj-5",
+									"maxclass" : "button",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "bang" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 116.0, 232.0, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"id" : "obj-2",
 									"maxclass" : "comment",
@@ -336,18 +348,6 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 370.6875, 200.0, 19.0, 20.0 ],
 									"text" : "1"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-89",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "async" ],
-									"patching_rect" : [ 40.0, 262.0, 47.0, 22.0 ],
-									"text" : "t async"
 								}
 
 							}
@@ -602,7 +602,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 6.0, 403.0, 38.0, 22.0 ],
+									"patching_rect" : [ 6.0, 383.0, 38.0, 22.0 ],
 									"text" : "r dmx"
 								}
 
@@ -613,7 +613,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.0, 305.0, 41.0, 22.0 ],
+									"patching_rect" : [ 40.0, 287.0, 41.0, 22.0 ],
 									"text" : "s dmx"
 								}
 
@@ -635,7 +635,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 170.0, 403.0, 150.0, 20.0 ],
+									"patching_rect" : [ 170.0, 383.0, 150.0, 20.0 ],
 									"text" : "USB transfer timeout (ms)"
 								}
 
@@ -647,7 +647,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 225.0, 226.0, 113.0, 47.0 ],
+									"patching_rect" : [ 242.5, 226.0, 113.0, 47.0 ],
 									"text" : "send DMX data synchronously or asynchronously"
 								}
 
@@ -669,7 +669,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.0, 347.0, 237.0, 20.0 ],
+									"patching_rect" : [ 40.0, 327.0, 237.0, 20.0 ],
 									"text" : "check if device is ready (readonly attribute)"
 								}
 
@@ -697,7 +697,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 183.0, 234.0, 40.0, 22.0 ],
+									"patching_rect" : [ 148.5, 233.0, 40.0, 22.0 ],
 									"text" : "async"
 								}
 
@@ -709,7 +709,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 146.0, 233.0, 33.0, 22.0 ],
+									"patching_rect" : [ 198.0, 233.0, 33.0, 22.0 ],
 									"text" : "sync"
 								}
 
@@ -721,7 +721,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 96.0, 202.0, 242.0, 20.0 ],
+									"patching_rect" : [ 76.0, 200.0, 242.0, 20.0 ],
 									"text" : "DMX512: max refresh rate = 44Hz (= 23ms)",
 									"textcolor" : [ 0.513725519180298, 0.513725519180298, 0.513725519180298, 1.0 ]
 								}
@@ -746,8 +746,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "bang" ],
-									"patching_rect" : [ 40.0, 233.0, 69.0, 22.0 ],
-									"text" : "qmetro 100"
+									"patching_rect" : [ 40.0, 233.0, 63.0, 22.0 ],
+									"text" : "qmetro 50"
 								}
 
 							}
@@ -784,7 +784,7 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 40.0, 449.0, 74.0, 22.0 ],
+									"patching_rect" : [ 40.0, 429.0, 74.0, 22.0 ],
 									"text" : "dmx.eurolite"
 								}
 
@@ -810,7 +810,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 58.0, 403.0, 110.0, 22.0 ],
+									"patching_rect" : [ 58.0, 383.0, 110.0, 22.0 ],
 									"text_width" : 63.0
 								}
 
@@ -836,7 +836,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 40.0, 371.0, 78.0, 22.0 ],
+									"patching_rect" : [ 40.0, 351.0, 78.0, 22.0 ],
 									"text_width" : 52.0
 								}
 
@@ -856,7 +856,7 @@
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 18.0, 347.0, 20.0, 20.0 ],
+									"patching_rect" : [ 18.0, 327.0, 20.0, 20.0 ],
 									"prototypename" : "Numbered steps",
 									"rounded" : 60.0,
 									"text" : "2",
@@ -960,6 +960,13 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-59", 0 ],
+									"source" : [ "obj-5", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-1", 0 ],
 									"source" : [ "obj-60", 0 ]
 								}
@@ -1002,7 +1009,7 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-89", 0 ],
+									"destination" : [ "obj-59", 0 ],
 									"source" : [ "obj-7", 0 ]
 								}
 
@@ -1088,13 +1095,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-62", 15 ],
 									"source" : [ "obj-83", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-59", 0 ],
-									"source" : [ "obj-89", 0 ]
 								}
 
 							}
