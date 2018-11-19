@@ -9,7 +9,7 @@
 	<!--METADATA-->
 
 	<metadatalist>
-		<metadata name='author'>Andrzej Kopeć </metadata>
+		<metadata name='author'>Andrzej Kopeć</metadata>
 		<metadata name='tag'>communication, lighting, DMX</metadata>
 	</metadatalist>
 
@@ -26,18 +26,18 @@
 	<methodlist>
 
 		<method name='bang'>
-			<digest>Prints test message (qelem)</digest>
-			<description>(for now does nothing (worthwhile))</description>
+			<digest>Trigger async transfer</digest>
+			<description>See <at>async</at></description>
 		</method>
 
 		<method name='sync'>
-			<digest>Trigger synchronous transfer of DMX data</digest>
-			<description>Trigger <b>synchronous</b> transfering of current DMX data buffer. The message is always deferred to main thred (Qelem). </description>
+			<digest>Trigger sync transfer</digest>
+			<description>Triggers <b>synchronous</b> transfering of current DMX data buffer. The message is always deferred to main thred (Qelem). </description>
 		</method>
 
 		<method name='async'>
-			<digest>Trigger asynchronous transfer of DMX data</digest>
-			<description>Trigger <b>asynchronous</b> transfering of current DMX data buffer. The message is always deferred to main thred (Qelem).</description>
+			<digest>Trigger async transfer</digest>
+			<description>Triggers <b>asynchronous</b> transfering of current DMX data buffer. The message is always deferred to main thred (Qelem).</description>
 		</method>
 		
 		<method name="set">

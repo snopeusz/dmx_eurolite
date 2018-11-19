@@ -181,6 +181,7 @@ void ext_main(void *r)
 
   class_addmethod(this_class, (method)dmx_eurolite_sync, "sync", 0);
   class_addmethod(this_class, (method)dmx_eurolite_sync, "async", 0);
+  class_addmethod(this_class, (method)dmx_eurolite_sync, "bang", 0);
 
   class_addmethod(this_class, (method)dmx_eurolite_setchannel, "setchannel",
                   A_DEFLONG, A_DEFLONG, 0);
