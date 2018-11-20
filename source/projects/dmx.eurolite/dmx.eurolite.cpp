@@ -14,7 +14,7 @@
 
 using namespace c74::max;
 
-static const char* version_string = "v0.2";
+static const char *version_string = "v0.2";
 
 struct t_dmx_eurolite
 {
@@ -119,19 +119,20 @@ void dmx_eurolite_setchannel(t_dmx_eurolite *self, long ch, long val)
 void dmx_eurolite_set(t_dmx_eurolite *self, t_symbol *sym, long argc,
                       t_atom *argv)
 {
-  if (argc < 2 || argc > 513)
+  if (argc < 2)
     return;
+  if (argc > 513)
+    argc = 513;
   const int first = atom_getlong(argv);
   const int data_count = argc - 1;
   std::array<unsigned char, 512> data;
-  for (int i = 0; i < data_count; i++)
+  for (int i = 1; i < data_count; i++)
   {
-    data[i]=
+    data[i] =
         static_cast<unsigned char>(clamp((int)atom_getlong(argv + i), 0, 255));
   }
   self->dmx->set_channel_array_from(first, data_count, data.data());
 }
-
 
 void dmx_eurolite_assist(t_dmx_eurolite *self, void *unused,
                          t_assist_function io, long index, char *string_dest)
