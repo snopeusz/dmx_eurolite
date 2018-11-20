@@ -14,6 +14,8 @@
 
 using namespace c74::max;
 
+static const char* version_string = "v0.2";
+
 struct t_dmx_eurolite
 {
   t_object ob;
@@ -208,4 +210,6 @@ void ext_main(void *r)
                        dmx_eurolite_ready_set);
 
   class_register(CLASS_BOX, this_class);
+
+  object_post(NULL, "dmx.eurolite %s by Andrzej Kopeć\n", version_string);
 }
