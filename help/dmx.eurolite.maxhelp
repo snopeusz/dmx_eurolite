@@ -151,7 +151,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 19.0, 353.0, 100.0, 22.0 ],
-									"text" : "prepend set 0"
+									"text" : "prepend set 10"
 								}
 
 							}
