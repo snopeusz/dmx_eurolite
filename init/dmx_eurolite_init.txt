@@ -1,0 +1,1 @@
+max oblist Devices dmx.eurolite;
